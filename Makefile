@@ -1,7 +1,15 @@
 .SECONDEXPANSION:
 PATH := $(PWD)/build/depot_tools:$(PATH)
 
-all: build/libwebrtc.a
+all: WebRTC.framework
+
+WebRTC.framework: build/libwebrtc.a
+	mkdir -p $@/Versions/A/Headers
+	cp -rf build/webrtc/src/talk/app/webrtc/objc/public/* $@/Versions/A/Headers
+	cp -f $^ $@/Versions/A/WebRTC
+	ln -s Versions/A/Headers $@/Headers
+	ln -s Versions/A/WebRTC $@/WebRTC
+	ln -s Versions/A $@/Versions/Current
 
 LIBVPX_TARGET_NAME_x86_64 = x86_64-iphonesimulator-gcc
 LIBVPX_TARGET_NAME_i386   = x86-iphonesimulator-gcc
@@ -69,4 +77,5 @@ build/depot_tools: |build
 
 .PHONY:
 clean:
+	rm -rf WebRTC.framework
 	rm -rf build

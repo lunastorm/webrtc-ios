@@ -1,5 +1,6 @@
 .SECONDEXPANSION:
 PATH := $(PWD)/build/depot_tools:$(PATH)
+SHELL := /bin/bash
 
 all: WebRTC.framework
 

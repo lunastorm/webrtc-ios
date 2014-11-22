@@ -1,3 +1,4 @@
+.SECONDARY:
 .SECONDEXPANSION:
 PATH := $(PWD)/build/depot_tools:$(PATH)
 SHELL := /bin/bash
@@ -11,6 +12,7 @@ WebRTC.framework: build/libwebrtc.a
 	ln -s Versions/A/Headers $@/Headers
 	ln -s Versions/A/WebRTC $@/WebRTC
 	ln -s Versions/A $@/Versions/Current
+	@echo -e "\nWebRTC.framework is built successfully\n"
 
 LIBVPX_TARGET_NAME_x86_64 = x86_64-iphonesimulator-gcc
 LIBVPX_TARGET_NAME_i386   = x86-iphonesimulator-gcc
@@ -58,7 +60,7 @@ GYP_DEFINES_arm = target_arch=arm64 build_neon=1
 
 build/webrtc-%: |build/webrtc
 	$(eval ARCH = $(subst /,,$(dir $*)))
-	cd build/webrtc; env GYP_GENERATORS="ninja" GYP_DEFINES="build_with_libjingle=1 build_with_chromium=0 libjingle_objc=1 OS=ios target_subarch=both $(GYP_DEFINES_$(ARCH))" GYP_GENERATOR_FLAGS="output_dir=../../webrtc-$(ARCH)" GYP_CROSSCOMPILE=1 gclient runhooks
+	cd $| && lockfile -1 gclient.lock && trap "rm -f gclient.lock" EXIT && env GYP_GENERATORS="ninja" GYP_DEFINES="build_with_libjingle=1 build_with_chromium=0 libjingle_objc=1 OS=ios target_subarch=both $(GYP_DEFINES_$(ARCH))" GYP_GENERATOR_FLAGS="output_dir=../../webrtc-$(ARCH)" GYP_CROSSCOMPILE=1 gclient runhooks
 
 build/webrtc: |build/depot_tools
 	mkdir -p $@

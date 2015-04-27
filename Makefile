@@ -10,6 +10,7 @@ WebRTC.framework: build/libwebrtc.a
 	ln -s Versions/A/Headers $@/Headers
 	ln -s Versions/A/WebRTC $@/WebRTC
 	ln -s Versions/A $@/Versions/Current
+	@echo -e "\nWebRTC.framework is built successfully\n"
 
 .INTERMEDIATE: build/libwebrtc-unstrip.a build/libwebrtc.a
 build/libwebrtc-unstrip.a: build/webrtc/src/talk/build/build_ios_libs.sh

@@ -1,4 +1,4 @@
-webrtc-ios-1
+webrtc-ios
 ============
 Build script which builds Google WebRTC project into iOS WebRTC.framework.
 Simply add WebRTC.framework into your Xcode project, include following libraries and enjoy deploying WebRTC enabled apps.

@@ -15,3 +15,10 @@ Clone repository, enter it using Terminal and **run make -j4**. After build proc
 - GLKit.framework
 - UIKit.framework
 - Foundation.framework
+
+#### May also require these frameworks:
+- VideoToolbox
+- GLKit
+- AudioToolbox
+- AVFoundation
+- CoreMedia
